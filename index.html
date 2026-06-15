@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institución Educativa Cañito de los Sábalos - INECAS</title>
+    <style>
+        /* Paleta de Colores (Predomina el Rojo) */
+        :root {
+            --rojo-institucional: #d62d20;
+            --verde-institucional: #008744;
+            --blanco: #ffffff;
+            --gris-claro: #f8f9fa;
+            --texto-oscuro: #212529;
+            --azul-admin: #002f6c;
+            --whatsapp-color: #25d366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--gris-claro);
+            color: var(--texto-oscuro);
+            line-height: 1.6;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Membrete Oficial */
+        header {
+            background-color: var(--blanco);
+            padding: 25px 20px;
+            border-bottom: 5px solid var(--verde-institucional);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .logo-escudo {
+            max-height: 120px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .datos-institucion {
+            text-align: center;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .datos-institucion h1 {
+            font-size: 1.8rem;
+            color: var(--rojo-institucional);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .datos-institucion p {
+            font-size: 0.85rem;
+            color: #495057;
+            margin: 2px 0;
+        }
+
+        .lema-institucional {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--verde-institucional);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 8px;
+        }
+
+        /* Menú de Navegación */
+        nav {
+            background-color: var(--rojo-institucional);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .menu li a {
+            display: block;
+            padding: 18px 22px;
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .menu li a.active, .menu li a:hover {
+            background-color: var(--verde-institucional);
+        }
+
+        /* Pestañas de Roles Privados */
+        .menu-privado {
+            display: none; 
+        }
+
+        /* Bloque de botones laterales */
+        .nav-right-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Botón Login / Logout */
+        .btn-login {
+            background-color: transparent;
+            color: var(--blanco);
+            border: 2px solid var(--blanco);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-login:hover {
+            background-color: var(--blanco);
+            color: var(--rojo-institucional);
+        }
+
+        /* Botón Coordinador Virtual */
+        .btn-asistente {
+            background-color: #ffffff;
+            color: var(--rojo-institucional) !important;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-asistente:hover {
+            background-color: var(--verde-institucional);
+            color: #ffffff !important;
+            transform: translateY(-2px);
+        }
+
+        /* Contenedor de Secciones */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            min-height: 450px;
+        }
+
+        section {
+            background: var(--blanco);
+            padding: 35px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: none; 
+        }
+
+        section.seccion-activa {
+            display: block !important;
+            animation: vistaSuave 0.3s ease-in-out;
+        }
+
+        @keyframes vistaSuave {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section h2 {
+            color: var(--rojo-institucional);
+            border-bottom: 3px solid var(--verde-institucional);
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .grid-horizonte {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .grid-horizonte h3 {
+            color: var(--verde-institucional);
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+        
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        /* Diseño de Sedes */
+        .grid-sedes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .sede-card {
+            background: #fdfdfd;
+            border: 1px solid #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sede-card h3 {
+            color: var(--rojo-institucional);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            border-left: 4px solid var(--verde-institucional);
+            padding-left: 10px;
+        }
+
+        .mapa-box {
+            width: 100%;
+            height: 220px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .btn-gps {
+            display: inline-block;
+            margin-top: 15px;
+            background-color: var(--verde-institucional);
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background 0.3s;
+            text-align: center;
+        }
+
+        .btn-gps:hover {
+            background-color: #005f30;
+        }
+
+        /* Formulario de Contacto en Vivo para WhatsApp */
+        .zona-whatsapp {
+            background-color: #f0fdf4;
+            border: 2px solid var(--whatsapp-color);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 35px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .zona-whatsapp h3 {
+            color: #1e7e34;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.3rem;
+        }
+
+        .form-whatsapp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .wp-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wp-field label {
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #2b5a35;
+        }
+
+        .wp-field input, .wp-field select, .wp-field textarea {
+            padding: 12px;
+            border: 1px solid #b2dfdb;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #fff;
+        }
+
+        .wp-field input:focus, .wp-field select:focus, .wp-field textarea:focus {
+            outline: 2px solid var(--whatsapp-color);
+        }
+
+        .wp-full-width {
+            grid-column: span 2;
+        }
+
+        .btn-whatsapp-submit {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--whatsapp-color);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-whatsapp-submit:hover {
+            background-color: #128c7e;
+            transform: translateY(-1px);
+        }
+
+        /* Ventana Flotante de Login (Modal) */
+        .modal-login {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background-color: var(--blanco);
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .modal-content h3 {
+            color: var(--rojo-institucional);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: #fff;
+        }
+
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .password-wrapper input {
+            padding-right: 45px; 
+        }
+
+        .btn-toggle-password {
+            position: absolute;
+            right: 5px;
+            padding: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #666;
+            user-select: none;
+        }
+
+        .btn-toggle-password:hover {
+            color: var(--rojo-institucional);
+        }
+
+        .btn-submit-login {
+            width: 100%;
+            background-color: var(--rojo-institucional);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-submit-login:hover {
+            background-color: #b32015;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #666;
+            padding: 5px;
+        }
+
+        /* Diseño de Paneles Privados */
+        .panel-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card-herramienta {
+            background: #f1f3f5;
+            padding: 20px;
+            border-radius: 6px;
+            border-top: 4px solid var(--rojo-institucional);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-herramienta.admin-card {
+            border-top-color: var(--azul-admin);
+        }
+
+        .card-herramienta h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card-herramienta p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .btn-accion {
+            display: inline-block;
+            margin-top: auto;
+            background-color: #495057;
+            color: white;
+            padding: 10px 12px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-accion:hover {
+            background-color: #343a40;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* =================================================== */
+        /* ZONA DE RESPONSIVIDAD AVANZADA (MÓVILES Y TABLETS)  */
+        /* =================================================== */
+        @media (max-width: 900px) {
+            .header-container {
+                gap: 15px;
+                padding: 5px 0;
+            }
+
+            .logo-escudo {
+                max-height: 90px;
+            }
+
+            .datos-institucion h1 {
+                font-size: 1.4rem;
+            }
+
+            .datos-institucion p {
+                font-size: 0.8rem;
+            }
+
+            .lema-institucional {
+                font-size: 0.95rem;
+                letter-spacing: 1px;
+            }
+
+            /* Reestructuración del Menú para pantallas táctiles */
+            .nav-container {
+                flex-direction: column;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .menu {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                gap: 2px;
+            }
+
+            .menu li {
+                width: 100%;
+            }
+
+            .menu li a {
+                padding: 14px;
+                border-radius: 4px;
+                font-size: 1rem;
+            }
+
+            .nav-right-buttons {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+                margin-top: 5px;
+            }
+
+            .btn-login, .btn-asistente {
+                width: 100%;
+                justify-content: center;
+                padding: 14px;
+                font-size: 1rem;
+                border-radius: 6px;
+            }
+
+            /* Contenedores */
+            .container {
+                margin: 20px auto;
+                padding: 0 12px;
+            }
+
+            section {
+                padding: 20px 15px;
+            }
+
+            section h2 {
+                font-size: 1.3rem;
+                margin-bottom: 18px;
+            }
+
+            /* Bloques en Cuadrícula colapsan a una columna */
+            .grid-horizonte, .grid-sedes {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .form-whatsapp-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .wp-full-width {
+                grid-column: auto;
+            }
+
+            .mapa-box {
+                height: 180px; /* Reducción de mapa para no tapar el scroll */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <img class="logo-escudo" src="Escudo Cañito.jpg" alt="Escudo Institucional INECAS">
+            
+            <div class="datos-institucion">
+                <h1>Institución Educativa Cañito de los Sábalos</h1>
+                <p>Resolución de creación No. 020 de enero de 1999 | PEI No. 04-01-62 de 27 de noviembre de 1998</p>
+                <p>Reconocimiento Oficial Resolución No. 0007016 de diciembre 19 de 2001</p>
+                <p>Preescolar - Básica Primaria - Básica Secundaria - Media Vocacional (10° y 11°)</p>
+                <p><strong>DANE No.</strong> 123162000131 | <strong>NIT:</strong> 812.002.132 | Núcleo 29A</p>
+                <p class="lema-institucional">Valores: Igualdad, Respeto y Vida</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="menu" id="main-menu">
+                <li><a onclick="irASeccion('inicio', this)" class="active">Inicio</a></li>
+                <li><a onclick="irASeccion('horizonte', this)">Horizonte Institucional</a></li>
+                <li><a onclick="irASeccion('actividades', this)">Actividades</a></li>
+                <li><a onclick="irASeccion('contacto', this)">Contacto y Sedes</a></li>
+                
+                <li id="pestana-docentes" class="menu-privado"><a onclick="irASeccion('docentes', this)" style="background-color: #e67e22; color: white;">📚 Herramientas Docentes</a></li>
+                <li id="pestana-admin" class="menu-privado"><a onclick="irASeccion('admin', this)" style="background-color: var(--azul-admin); color: white;">🛠️ Panel Administrador</a></li>
+            </ul>
+            
+            <div class="nav-right-buttons">
+                <button class="btn-login" id="auth-btn" onclick="abrirCerrarSesion()">🔑 Iniciar Sesión</button>
+                
+                <a href="https://gemini.google.com/gem/1Bb5D5tdo9fFWqHUEEp66xbdfp5fynN0p?usp=sharing" target="_blank" class="btn-asistente">
+                    🤖 Coordinador Virtual
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <section id="inicio" class="seccion-activa">
+            <h2>Bienvenidos a INECAS</h2>
+            <p>Proyecto Educativo Institucional (PEI) 2026. Comprometidos con el desarrollo integral, la convivencia y la excelencia académica de los niños, jóvenes y adolescentes del municipio de Cereté, Córdoba, bajo el pilar de nuestros valores fundamentales.</p>
+            <p style="margin-top: 15px;">Use el menú superior para alternar de forma limpia entre las diferentes secciones informativas o consulte de manera directa a nuestro <strong>Coordinador Virtual</strong> para soporte en tiempo real.</p>
+        </section>
+
+        <section id="horizonte">
+            <h2>Horizonte Institucional</h2>
+            <div class="grid-horizonte">
+                <div>
+                    <h3>Misión</h3>
+                    <p>Formar estudiantes integrales guiados por los valores de la <strong>igualdad, el respeto y la vida</strong>, con un fuerte enfoque en competencias ciudadanas, inclusión y excelencia, preparándolos para afrontar con éxito la educación superior y aportar positivamente al desarrollo de su comunidad.</p>
+                </div>
+                <div>
+                    <h3>Visión</h3>
+                    <p>Para el año 2026, la Institución Educativa Cañito de los Sábalos se consolidará como un referente educativo de calidad en Cereté y el departamento de Córdoba, reconocida por su vivencia incansable de valores, sana convivencia, liderazgo académico y formación de ciudadanos proactivos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="actividades">
+            <h2>Nuestras Actividades</h2>
+            <p>En el marco del PEI 2026, ejecutamos planes formativos continuos:</p>
+            <ul>
+                <li>Gestión pedagógica y académica enfocada en las pruebas externas.</li>
+                <li>Comité de Convivencia Escolar activo para el bienestar y la resolución pacífica de conflictos.</li>
+                <li>Proyectos transversales de medio ambiente, cultura, deporte y promoción de la equidad y la vida.</li>
+            </ul>
+        </section>
+
+        <section id="contacto">
+            <h2>Nuestras Sedes y Ubicación</h2>
+            <p style="margin-bottom: 20px;">Contamos con dos sedes acondicionadas en el municipio de Cereté para brindar una cobertura educativa óptima:</p>
+            
+            <div class="grid-sedes">
+                <div class="sede-card">
+                    <h3>Sede Principal: Cañito de los Sábalos</h3>
+                    <p><strong>Dirección:</strong> Corregimiento Cañito de los Sábalos, Cereté - Córdoba</p>
+                    <p>Sede principal administrativa, bachillerato (Básica Secundaria y Media Vocacional).</p>
+                    <a href="https://maps.google.com/?q=Ca%C3%B1ito+de+los+S%C3%A1balos,+Ceret%C3%A9,+C%C3%B3rdoba" target="_blank" class="btn-gps">📍 Abrir GPS Sede Principal</a>
+                    <div class="mapa-box">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15764.123512395123!2d-75.7623412!3d8.8812341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e5a2fe2bf53cfcb%3A0x95cf73ab9dfcb8ef!2sCa%C3%B1ito%20De%20Los%20Sabalo%2C%20Ceret%C3%A9%2C%20C%C3%B3rdoba!5e0!3m2!1ses!2sco!4v1710000000000!5m2!1ses!2sco" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="sede-card">
+                    <h3>Sede: Santa María</h3>
+                    <p><strong>Dirección:</strong> Calle 2 Número 136, Cereté - Córdoba</p>
+                    <p>Sede dedicada a los niveles de Preescolar y Básica Primaria.</p>
+                    <a href="https://maps.google.com/?q=Calle+2+%23136,+Ceret%C3%A9,+C%C3%B3rdoba" target="_blank" class="btn-gps">📍 Abrir GPS Sede Santa María</a>
+                    <div class="mapa-box">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3941.011235812351!2d-75.7951234!3d8.8841235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNTMnMDIuOCJOIDc1wrA0NyczMi40Ilc!5e0!3m2!1ses!2sco!4v1710000000001!5m2!1ses!2sco" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="zona-whatsapp">
+                <h3>💬 Buzón de Mensajería Directa (WhatsApp)</h3>
+                <p style="margin-bottom: 15px; font-size: 0.9rem; color: #444;">Diligencie los campos y haga clic en enviar. El sitio web empaquetará su texto y lo transferirá inmediatamente a la línea institucional configurada.</p>
+                
+                <div class="form-whatsapp-grid">
+                    <div class="wp-field">
+                        <label for="wp-nombre">Nombre Completo:</label>
+                        <input type="text" id="wp-nombre" placeholder="Ej: Juan Pérez">
+                    </div>
+                    <div class="wp-field">
+                        <label for="wp-rol">¿Quién Consulta?:</label>
+                        <select id="wp-rol">
+                            <option value="Padre / Acudiente">Padre de Familia / Acudiente</option>
+                            <option value="Estudiante">Estudiante</option>
+                            <option value="Docente Exterior">Docente / Profesional Exterior</option>
+                            <option value="Otro">Otro Ciudadano</option>
+                        </select>
+                    </div>
+                    <div class="wp-field wp-full-width">
+                        <label for="wp-asunto">Motivo o Solicitud (Escriba su mensaje aquí):</label>
+                        <textarea id="wp-asunto" rows="3" placeholder="Escriba aquí detalladamente su duda sobre matrículas, certificados, notas..."></textarea>
+                    </div>
+                </div>
+                
+                <button class="btn-whatsapp-submit" onclick="enviarMensajeEscritoWhatsApp()">
+                    🚀 Enviar este mensaje por WhatsApp
+                </button>
+            </div>
+        </section>
+
+        <section id="docentes">
+            <h2>📚 Espacio de Herramientas para Docentes y Directivos Docentes</h2>
+            <p>Bienvenido al módulo académico. Aquí tiene acceso a los aplicativos internos para el desarrollo curricular 2026:</p>
+            
+            <div class="panel-box">
+                <div class="card-herramienta" style="border-top-color: #e67e22;">
+                    <h4>📋 Solicitud de Permisos</h4>
+                    <p>Diligencie el formulario oficial para la solicitud y trámite de permisos institucionales docentes.</p>
+                    <a href="https://forms.gle/eLkmqsSKWh9vv4f66" target="_blank" class="btn-accion" style="background-color: #e67e22;">Abrir Formulario</a>
+                </div>
+
+                <div class="card-herramienta">
+                    <h4>📊 Sistema de Calificaciones</h4>
+                    <p>Suba las notas del periodo actual y genere los consolidados del boletín.</p>
+                    <a href="#" class="btn-accion">Ingresar a Planillas</a>
+                </div>
+                <div class="card-herramienta">
+                    <h4>📝 Observador del Estudiante</h4>
+                    <p>Registre seguimientos de convivencia y compromisos de Aula.</p>
+                    <a href="#" class="btn-accion">Abrir Bitácoras</a>
+                </div>
+                <div class="card-herramienta">
+                    <h4>📁 Guías y Recursos de Aprendizaje</h4>
+                    <p>Depósito institucional para subir material del Plan de Área de las Sedes.</p>
+                    <a href="#" class="btn-accion">Subir Guías</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="admin">
+            <h2>🛠️ Panel de Control del Administrador</h2>
+            <p>Gestión operativa global de la plataforma web de la Institución Educativa Cañito de los Sábalos:</p>
+            
+            <div class="panel-box">
+                <div class="card-herramienta admin-card">
+                    <h4>📸 Cargar Fotos e Imágenes</h4>
+                    <p>Suba capturas del registro fotográfico de eventos escolares a la base de datos.</p>
+                    <a href="#" class="btn-accion" style="background-color: var(--azul-admin);">Examinar Archivos...</a>
+                </div>
+                <div class="card-herramienta admin-card">
+                    <h4>📅 Calendario y Actividades</h4>
+                    <p>Programe las asambleas, comités de convivencia y efemérides en la página web principal.</p>
+                    <a href="#" class="btn-accion" style="background-color: var(--azul-admin);">Crear Evento</a>
+                </div>
+                <div class="card-herramienta admin-card">
+                    <h4>🔒 Control de Usuarios</h4>
+                    <p>Administre los permisos y contraseñas de las plantas docentes de las sedes.</p>
+                    <a href="#" class="btn-accion" style="background-color: var(--azul-admin);">Ver Listado</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="modal-login" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="cerrarModal()">×</span>
+            <h3>Portal de Acceso INECAS</h3>
+            <div class="form-group">
+                <label>Seleccione su Rol:</label>
+                <select id="userRole">
+                    <option value="Docente">Docente</option>
+                    <option value="Directivo">Directivo Docente</option>
+                    <option value="Administrador">Administrador</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Contraseña:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" placeholder="••••••••">
+                    <button type="button" class="btn-toggle-password" onclick="alternarVisibilidadContrasena()">👁️</button>
+                </div>
+            </div>
+            <button class="btn-submit-login" onclick="procesarAutenticacion()">Ingresar al Sistema</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Institución Educativa Cañito de los Sábalos - INECAS</p>
+        <p>Cereté - Córdoba, Colombia</p>
+    </footer>
+
+    <script>
+        var TELEFONO_WHATSAPP = "573000000000"; 
+        var rolUsuarioActual = "publico";
+
+        function irASeccion(idSeccion, botonActual) {
+            var todasLasSecciones = document.getElementsByTagName('section');
+            for (var i = 0; i < todasLasSecciones.length; i++) {
+                todasLasSecciones[i].classList.remove('seccion-activa');
+            }
+
+            var todosLosEnlaces = document.querySelectorAll('.menu li a');
+            for (var j = 0; j < todosLosEnlaces.length; j++) {
+                todosLosEnlaces[j].classList.remove('active');
+            }
+
+            var seccionDestino = document.getElementById(idSeccion);
+            if (seccionDestino) {
+                seccionDestino.classList.add('seccion-activa');
+                // Auto Scroll hacia arriba al cambiar de pestaña en el móvil
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
+
+            if (botonActual) {
+                botonActual.classList.add('active');
+            }
+        }
+
+        function enviarMensajeEscritoWhatsApp() {
+            var nombre = document.getElementById('wp-nombre').value.trim();
+            var rol = document.getElementById('wp-rol').value;
+            var mensaje = document.getElementById('wp-asunto').value.trim();
+
+            if (nombre === "" || mensaje === "") {
+                alert("Por favor, escriba su nombre y redacte el mensaje antes de enviar.");
+                return;
+            }
+
+            var textoFinal = "🏛️ *NUEVA CONSULTA DESDE LA WEB INECAS*\n\n" +
+                             "👤 *Nombre:* " + nombre + "\n" +
+                             "🏷️ *Tipo de usuario:* " + rol + "\n\n" +
+                             "💬 *Mensaje:* " + mensaje;
+            
+            var textoCodificado = encodeURIComponent(textoFinal);
+            var urlWhatsApp = "https://wa.me/" + TELEFONO_WHATSAPP + "?text=" + textoCodificado;
+            
+            window.open(urlWhatsApp, '_blank');
+        }
+
+        function alternarVisibilidadContrasena() {
+            var inputPassword = document.getElementById('password');
+            var botonOjo = document.querySelector('.btn-toggle-password');
+            
+            if (inputPassword.type === "password") {
+                inputPassword.type = "text";
+                botonOjo.innerHTML = "🙈";
+            } else {
+                inputPassword.type = "password";
+                botonOjo.innerHTML = "👁️";
+            }
+        }
+
+        function abrirCerrarSesion() {
+            if (rolUsuarioActual === "publico") {
+                document.getElementById('loginModal').style.display = 'flex';
+            } else {
+                rolUsuarioActual = "publico";
+                document.getElementById('pestana-docentes').style.display = 'none';
+                document.getElementById('pestana-admin').style.display = 'none';
+                document.getElementById('auth-btn').innerHTML = "🔑 Iniciar Sesión";
+                document.getElementById('auth-btn').style.backgroundColor = "transparent";
+                alert("Sesión cerrada correctamente.");
+                irASeccion('inicio', document.querySelectorAll('.menu li a')[0]);
+            }
+        }
+
+        function cerrarModal() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('userRole').selectedIndex = 0; 
+            document.getElementById('password').value = "";
+            document.getElementById('password').type = "password";
+            document.querySelector('.btn-toggle-password').innerHTML = "👁️";
+        }
+
+        function procesarAutenticacion() {
+            var rolSeleccionado = document.getElementById('userRole').value;
+            var pass = document.getElementById('password').value;
+
+            if (rolSeleccionado === "Administrador" && pass === "12345") {
+                rolUsuarioActual = "Administrador";
+                document.getElementById('pestana-admin').style.display = 'block';
+                document.getElementById('pestana-docentes').style.display = 'none';
+                document.getElementById('auth-btn').innerHTML = "❌ Salir (Administrador)";
+                document.getElementById('auth-btn').style.backgroundColor = "var(--azul-admin)";
+                cerrarModal();
+                irASeccion('admin', document.querySelector('#pestana-admin a'));
+            } 
+            else if (rolSeleccionado === "Docente" && pass === "docente2026") {
+                rolUsuarioActual = "Docente";
+                document.getElementById('pestana-docentes').style.display = 'block';
+                document.getElementById('pestana-admin').style.display = 'none';
+                document.getElementById('auth-btn').innerHTML = "❌ Salir (Docente)";
+                document.getElementById('auth-btn').style.backgroundColor = "#e67e22";
+                cerrarModal();
+                irASeccion('docentes', document.querySelector('#pestana-docentes a'));
+            }
+            else if (rolSeleccionado === "Directivo" && pass === "directivo2026") {
+                rolUsuarioActual = "Directivo Docente";
+                document.getElementById('pestana-docentes').style.display = 'block';
+                document.getElementById('pestana-admin').style.display = 'none';
+                document.getElementById('auth-btn').innerHTML = "❌ Salir (Directivo Docente)";
+                document.getElementById('auth-btn').style.backgroundColor = "#e67e22";
+                cerrarModal();
+                irASeccion('docentes', document.querySelector('#pestana-docentes a'));
+            }
+            else {
+                alert("Credenciales incorrectas o contraseña inválida para este rol. Intente nuevamente.");
+            }
+        }
+    </script>
+
+</body>
+</html>
